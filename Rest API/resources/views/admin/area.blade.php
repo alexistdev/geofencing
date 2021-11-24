@@ -1,4 +1,4 @@
-<x-admin.template-layout :title="$judul">
+<x-admin.template-layout :title="$judul" :menu="$menu">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">

@@ -1,15 +1,15 @@
-<x-admin.template-layout :title="$judul">
+<x-admin.template-layout :title="$judul" :menu="$menu">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Blank Page</h1>
+                    <h1>Managemen User</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Blank Page</li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Users</li>
                     </ol>
                 </div>
             </div>
@@ -20,27 +20,40 @@
     <section class="content">
 
         <!-- Default box -->
-        <div class="card">
+        <div class="card card-navy">
             <div class="card-header">
-                <h3 class="card-title">Title</h3>
-
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
+                <h3 class="card-title">Daftar User</h3>
+                <button class="btn btn-sm btn-success float-right">Tambah</button>
             </div>
             <div class="card-body">
-                Start creating your amazing application!
+                <table class="table table-striped" id="tableUser">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="text-center">#</th>
+                        <th scope="col" class="text-center">Nama</th>
+                        <th scope="col" class="text-center">Email</th>
+                        <th scope="col" class="text-center">Created</th>
+                        <th scope="col" class="text-center">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php $no=1; ?>
+                    @foreach($tabelUser as $row)
+                    <tr>
+                        <th class="text-center">{{$no++}}</th>
+                        <td>{{$row->name}}</td>
+                        <td>{{$row->email}}</td>
+                        <td class="text-center">{{$row->created_at}}</td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-primary">Suspend</button>
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
             <!-- /.card-body -->
-            <div class="card-footer">
-                Footer
-            </div>
-            <!-- /.card-footer-->
         </div>
         <!-- /.card -->
 

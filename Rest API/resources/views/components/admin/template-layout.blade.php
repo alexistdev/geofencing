@@ -35,7 +35,8 @@
     </div>
     <!-- ./wrapper -->
 
-   <x-admin.js-layout />
+    <x-admin.js-layout />
+    <x-admin.datatable-js :menu="$menu"/>
     </body>
     </html>
 </div>

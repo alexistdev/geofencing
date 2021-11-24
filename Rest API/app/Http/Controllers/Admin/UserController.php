@@ -23,8 +23,11 @@ class UserController extends Controller
 
     public function index()
     {
+        $user = User::where('role_id',"!=", 1)->get();
         return view('admin.user',array(
             'judul' => "Dashboard Administrator | Geofencing V.1.0",
+            'tabelUser' => $user,
+            'menu' => 'user',
         ));
     }
 
