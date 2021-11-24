@@ -1,0 +1,1 @@
+<x-admin.template-layout/>
