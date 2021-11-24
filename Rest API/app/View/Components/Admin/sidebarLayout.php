@@ -4,19 +4,16 @@ namespace App\View\Components\Admin;
 
 use Illuminate\View\Component;
 
-class TemplateLayout extends Component
+class sidebarLayout extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-
-    public $title;
-
-    public function __construct($title)
+    public function __construct()
     {
-        $this->title = $title;
+        //
     }
 
     /**
@@ -26,6 +23,6 @@ class TemplateLayout extends Component
      */
     public function render()
     {
-        return view('components.admin.template-layout');
+        return view('components.admin.sidebar-layout');
     }
 }

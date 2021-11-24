@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\{DashboardController as DashAdmin};
+use App\Http\Controllers\Admin\{DashboardController as DashAdmin,UserController as UserAdmin,SettingController as SettingAdmin, AreaController as AreaAdmin, InformationController as InfoAdmin};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +25,10 @@ Route::get('/dashboard', function () {
 Route::group(['middleware' => ['web','auth', 'roles']],function() {
     Route::group(['roles' => 'admin'], function () {
         Route::get('/admin/dashboard', [DashAdmin::class, 'index'])->name('admin.dashboard');
+        Route::get('/admin/user', [UserAdmin::class, 'index'])->name('admin.user');
+        Route::get('/admin/setting', [SettingAdmin::class, 'index'])->name('admin.setting');
+        Route::get('/admin/area', [AreaAdmin::class, 'index'])->name('admin.area');
+        Route::get('/admin/info', [InfoAdmin::class, 'index'])->name('admin.info');
     });
 });
 

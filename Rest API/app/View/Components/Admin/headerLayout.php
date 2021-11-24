@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\Admin;
+namespace App\View\Components\admin;
 
 use Illuminate\View\Component;
 
-class TemplateLayout extends Component
+class headerLayout extends Component
 {
     /**
      * Create a new component instance.
@@ -26,6 +26,6 @@ class TemplateLayout extends Component
      */
     public function render()
     {
-        return view('components.admin.template-layout');
+        return view('components.admin.header-layout');
     }
 }
