@@ -6,11 +6,15 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
+import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,15 +24,19 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.coder.geofencing.databinding.ActivityMapsBinding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
-
+    private static final String TAG = "MapsActivity";
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     private GeofencingClient geofencingClient;
+    private GeofenceHelper geofenceHelper;
     private int FiNE_LOCATION_ACCESS_REQUEST_CODE = 10001;
 
     private float GEOFENCE_RADIUS = 1000;
+    private String GEOFENCE_ID = "MYID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +51,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         geofencingClient = LocationServices.getGeofencingClient(this);
+        geofenceHelper = new GeofenceHelper(this);
     }
 
     /**
@@ -114,6 +123,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.clear();
         addMarker(latLng);
         addCircle(latLng, GEOFENCE_RADIUS);
+        addGeofence(latLng, GEOFENCE_RADIUS);
+    }
+
+    private void addGeofence(LatLng latLng, float radius){
+        Geofence geofence = geofenceHelper.getGeofence(GEOFENCE_ID,latLng,radius,Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_DWELL | Geofence.GEOFENCE_TRANSITION_EXIT);
+        GeofencingRequest geofencingRequest = geofenceHelper.geofencingRequest(geofence);
+        PendingIntent pendingIntent = geofenceHelper.getPendingIntent();
+
+        geofencingClient.addGeofences(geofencingRequest,pendingIntent)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d(TAG, "onSuccess: Geofence Added...");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        String errorMessage = geofenceHelper.getErrorString(e);
+                        Log.d(TAG,"onFailure: "+ errorMessage);
+                    }
+                });
     }
 
     private void addMarker(LatLng latLng){
