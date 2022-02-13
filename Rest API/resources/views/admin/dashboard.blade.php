@@ -1,4 +1,4 @@
-<x-admin.template-layout :title="$judul" :menu="$menu">
+<x-admin.template-layout :title="$judul" :second-tag="$tagSubMenu" :aktif-tag="$aktifTag" >
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
@@ -43,7 +43,7 @@
             <!-- /.card-footer-->
         </div>
         <!-- /.card -->
-
     </section>
     <!-- /.content -->
+    <x-admin.js-layout/>
 </x-admin.template-layout>

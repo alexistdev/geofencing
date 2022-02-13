@@ -24,7 +24,11 @@ class DashboardController extends Controller
     public function index()
     {
         return view('admin.dashboard',array(
-            'judul' => "Dashboard Administrator | Geofencing V.1.0",
+            'judul' => "Dashboard Store | SIBEL V.2.0",
+            'userName' => $this->users,
+            'roleUser' => $this->role->name,
+            'aktifTag' => "dashboard",
+            'tagSubMenu' => "dashboard",
         ));
     }
 

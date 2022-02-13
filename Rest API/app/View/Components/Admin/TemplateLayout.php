@@ -13,12 +13,15 @@ class TemplateLayout extends Component
      */
 
     public $title;
-    public $menu;
+    public $secondTag;
+    public $aktifTag;
 
-    public function __construct($title,$menu)
+
+    public function __construct($title,$secondTag,$aktifTag)
     {
         $this->title = $title;
-        $this->menu = $menu;
+        $this->secondTag = $secondTag;
+        $this->aktifTag = $aktifTag;
     }
 
     /**
