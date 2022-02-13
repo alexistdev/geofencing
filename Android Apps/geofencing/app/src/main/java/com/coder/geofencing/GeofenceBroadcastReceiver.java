@@ -11,6 +11,6 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         // TODO: This method is called when the BroadcastReceiver is receiving
         // an Intent broadcast.
-        Toast.makeText(context,"GEOFENCE TRIGGERED",Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,"ANDA MEMASUKI KAWASAN RAWAN KECELAKAAN LALU LINTAS !!!",Toast.LENGTH_SHORT).show();
     }
 }

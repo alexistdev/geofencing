@@ -35,7 +35,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GeofenceHelper geofenceHelper;
     private int FiNE_LOCATION_ACCESS_REQUEST_CODE = 10001;
 
-    private float GEOFENCE_RADIUS = 1000;
+    private float GEOFENCE_RADIUS = 500;
     private String GEOFENCE_ID = "MYID";
 
     @Override
@@ -126,12 +126,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         addGeofence(latLng, GEOFENCE_RADIUS);
     }
 
-    private void addGeofence(LatLng latLng, float radius){
-        Geofence geofence = geofenceHelper.getGeofence(GEOFENCE_ID,latLng,radius,Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_DWELL | Geofence.GEOFENCE_TRANSITION_EXIT);
+    private void addGeofence(LatLng latLng, float radius) {
+        Geofence geofence = geofenceHelper.getGeofence(GEOFENCE_ID, latLng, radius, Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_DWELL | Geofence.GEOFENCE_TRANSITION_EXIT);
         GeofencingRequest geofencingRequest = geofenceHelper.geofencingRequest(geofence);
         PendingIntent pendingIntent = geofenceHelper.getPendingIntent();
 
-        geofencingClient.addGeofences(geofencingRequest,pendingIntent)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        geofencingClient.addGeofences(geofencingRequest, pendingIntent)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -142,7 +152,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         String errorMessage = geofenceHelper.getErrorString(e);
-                        Log.d(TAG,"onFailure: "+ errorMessage);
+                        Log.d(TAG, "onFailure: " + errorMessage);
                     }
                 });
     }
