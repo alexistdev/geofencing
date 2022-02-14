@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/menu1"
+        android:id="@+id/home_menu"
+        android:icon="@drawable/ic_home"/>
+    <item android:title="@string/menu2"
+        android:id="@+id/info_menu"
+        android:icon="@drawable/ic_baseline_area_chart_24"/>
+    <item android:title="@string/menu3"
+        android:id="@+id/helper_menu"
+        android:icon="@drawable/ic_helper"/>
+</menu>

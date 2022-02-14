@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- Login $ Register -->
+    <color name="biru1">#01B4D2</color>
+    <color name="biru2">#66BFC5</color>
+    <color name="biru3">#36596A</color>
+    <color name="pink1">#EA81A5</color>
+    <color name="pink2">#F68685</color>
+    <color name="hijau">#0EA44F</color>
+    <color name="abu1">#E6E9EF</color>
+    <color name="abu2">#9EA7C1</color>
+    <color name="toolbarSelector">#AFAE66</color>
 </resources>
